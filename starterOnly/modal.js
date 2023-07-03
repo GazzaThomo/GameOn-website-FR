@@ -29,7 +29,6 @@ document.addEventListener("keydown", closeModalEscape);
 
 //close modal on X click or if click is outside the content field
 function closeModal(e) {
-  console.log(e.target);
   if (e.target === modalbg || e.target === modalCloseBtn) {
     modalbg.style.display = "none";
   }
@@ -42,3 +41,26 @@ function closeModalEscape(e) {
     modalbg.style.display = "none";
   }
 }
+
+//Form submit
+let form = document.querySelector("form");
+
+form.addEventListener("submit", (e) => {
+  console.log(e);
+  e.preventDefault();
+  const firstName = document.getElementById("first");
+  const lastName = document.getElementById("last");
+  const email = document.getElementById("email");
+  const birthDate = document.getElementById("birthdate");
+  const numberOfTournements = document.getElementById("quantity");
+  const location = document.querySelectorAll("input[type=radio]");
+  const conditionsCheckbox = document.getElementById("checkbox1");
+
+  try {
+    validateFirstName(firstName);
+    validateLastName(lastName);
+    validateEmail(email);
+  } catch (error) {
+    console.log("une erreur est survenue : " + error.message);
+  }
+});
