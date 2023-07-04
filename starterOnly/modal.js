@@ -60,6 +60,9 @@ form.addEventListener("submit", (e) => {
     validateFirstName(firstName);
     validateLastName(lastName);
     validateEmail(email);
+    validateNumberOfTournements(numberOfTournements);
+    validateRadioButtons(location);
+    validateConditions(conditionsCheckbox);
   } catch (error) {
     console.log("une erreur est survenue : " + error.message);
   }

@@ -15,18 +15,30 @@ function validateLastName(lastName) {
 function validateEmail(email) {
   const emailRegex = new RegExp("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
   let emailValidation = emailRegex.test(email.value);
-  console.log(emailValidation);
   if (!emailValidation) {
     throw new Error("L'email n'est pas valide");
   }
 }
 
 function validateNumberOfTournements(numberOfTournements) {
-  if (typeof numberOfTournements !== "number") {
+  let stringNumberRegex = new RegExp("^[0-9]+$");
+  let numberValidation = stringNumberRegex.test(numberOfTournements.value);
+  if (!numberValidation) {
     throw new Error("Le nombre de tournois doit être un nombre !");
   }
 }
 
-function validateRadioButtons(radioButtons) {}
+function validateRadioButtons(location) {
+  for (let i = 0; i < location.length; i++) {
+    if (location[i].checked) {
+      return true;
+    }
+  }
+  throw new Error("Il faut sélectionner au moins une ville !");
+}
 
-function validateConditions(conditionsCheckbox) {}
+function validateConditions(conditionsCheckbox) {
+  if (!conditionsCheckbox.checked) {
+    throw new Error(`Vous devez accepter les conditions d'utilisation`);
+  }
+}
