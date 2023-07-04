@@ -23,14 +23,14 @@ function launchModal() {
 
 //This part of the code can be refactored later
 //close modal event
-modalbg.addEventListener("click", closeModal);
-modalCloseBtn.addEventListener("click", closeModal);
+modalbg.addEventListener("click", closeModalAvecXouBg);
+modalCloseBtn.addEventListener("click", closeModalAvecXouBg);
 document.addEventListener("keydown", closeModalEscape);
 
 //close modal on X click or if click is outside the content field
-function closeModal(e) {
+function closeModalAvecXouBg(e) {
   if (e.target === modalbg || e.target === modalCloseBtn) {
-    modalbg.style.display = "none";
+    closeModal();
   }
 }
 
@@ -38,8 +38,12 @@ function closeModal(e) {
 function closeModalEscape(e) {
   const style = window.getComputedStyle(modalbg);
   if (style.display === "block" && e.key === "Escape") {
-    modalbg.style.display = "none";
+    closeModal();
   }
+}
+
+function closeModal() {
+  modalbg.style.display = "none";
 }
 
 //Form submit

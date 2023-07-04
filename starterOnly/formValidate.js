@@ -21,7 +21,7 @@ function validateEmail(email) {
 }
 
 function validateNumberOfTournements(numberOfTournements) {
-  let stringNumberRegex = new RegExp("^[0-9]+$");
+  let stringNumberRegex = new RegExp("^\\d+$");
   let numberValidation = stringNumberRegex.test(numberOfTournements.value);
   if (!numberValidation) {
     throw new Error("Le nombre de tournois doit être un nombre !");
