@@ -1,44 +1,80 @@
 //We use these functions to validate all the parameters in the formula when submitting
 
+// function validateFirstName(firstName) {
+//   if (firstName.value.length < 2) {
+//     throw new Error("Le prénom doit faire 2 caractères ou plus !");
+//   }
+// }
+
 function validateFirstName(firstName) {
   if (firstName.value.length < 2) {
-    throw new Error("Le prénom doit faire 2 caractères ou plus !");
+    let errorMessage = "Le prénom doit faire au minimum 2 caractères !";
+    addErrorCssToHtml(firstName, errorMessage);
+    return;
   }
+  removeErrorCssToHtml(firstName);
 }
 
 function validateLastName(lastName) {
   if (lastName.value.length < 2) {
-    throw new Error("Le nom de famille doit faire 2 caractères ou plus !");
+    let errorMessage = "Le nom de famille doit faire au minimum 2 caractères !";
+    addErrorCssToHtml(lastName, errorMessage);
+    return;
   }
+  removeErrorCssToHtml(lastName);
 }
 
 function validateEmail(email) {
   const emailRegex = new RegExp("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
   let emailValidation = emailRegex.test(email.value);
   if (!emailValidation) {
-    throw new Error("L'email n'est pas valide");
+    let errorMessage = "L'adresse mail n'est pas valide !";
+    addErrorCssToHtml(email, errorMessage);
+    return;
   }
+  removeErrorCssToHtml(email);
 }
 
 function validateNumberOfTournements(numberOfTournements) {
   let stringNumberRegex = new RegExp("^\\d+$");
   let numberValidation = stringNumberRegex.test(numberOfTournements.value);
   if (!numberValidation) {
-    throw new Error("Le nombre de tournois doit être un nombre !");
+    let errorMessage = "Vous devez rentrer un nombre entier !";
+    addErrorCssToHtml(numberOfTournements, errorMessage);
+    return;
   }
+  removeErrorCssToHtml(numberOfTournements);
 }
 
 function validateRadioButtons(location) {
   for (let i = 0; i < location.length; i++) {
     if (location[i].checked) {
+      removeErrorCssToHtml(location[i]);
       return true;
     }
+    let errorMessage = "Veuillez sélectionner au moins 1 ville parmi la liste.";
+    console.log(location[i].parentNode);
+    addErrorCssToHtml(location[i], errorMessage);
   }
-  throw new Error("Il faut sélectionner au moins une ville !");
 }
 
 function validateConditions(conditionsCheckbox) {
   if (!conditionsCheckbox.checked) {
-    throw new Error(`Vous devez accepter les conditions d'utilisation`);
+    let errorMessage = "Vous devez accepter les CGU.";
+    addErrorCssToHtml(conditionsCheckbox, errorMessage);
+    return;
   }
+  removeErrorCssToHtml(conditionsCheckbox);
+}
+
+function addErrorCssToHtml(node, errorMessage) {
+  let parentNode = node.parentNode; // get parent of input data
+  parentNode.setAttribute("data-error", errorMessage);
+  parentNode.setAttribute("data-error-visible", "true");
+}
+
+function removeErrorCssToHtml(node) {
+  let parentNode = node.parentNode; // get parent of input data
+  parentNode.setAttribute("data-error", "");
+  parentNode.setAttribute("data-error-visible", "false");
 }
