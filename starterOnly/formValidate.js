@@ -67,6 +67,7 @@ function validateConditions(conditionsCheckbox) {
   removeErrorCssToHtml(conditionsCheckbox);
 }
 
+// DRY functions!
 function addErrorCssToHtml(node, errorMessage) {
   let parentNode = node.parentNode; // get parent of input data
   parentNode.setAttribute("data-error", errorMessage);

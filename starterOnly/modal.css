@@ -481,6 +481,15 @@ input {
 .hero-section > .btn-signup {
   display: none;
 }
+
+.confirmed {
+  display: none;
+  text-align: center;
+  align-items: center;
+  font-size: 36px;
+  font-weight: 400;
+}
+
 footer {
   padding-left: 2vw;
   padding-right: 2vw;

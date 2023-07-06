@@ -59,7 +59,7 @@ form.addEventListener("submit", (e) => {
   const numberOfTournements = document.getElementById("quantity");
   const location = document.querySelectorAll("input[type=radio]");
   const conditionsCheckbox = document.getElementById("checkbox1");
-
+  const formHeight = document.querySelector("form").clientHeight;
   try {
     validateFirstName(firstName);
     validateLastName(lastName);
@@ -67,7 +67,19 @@ form.addEventListener("submit", (e) => {
     validateNumberOfTournements(numberOfTournements);
     validateRadioButtons(location);
     validateConditions(conditionsCheckbox);
+    console.log("success");
+    formConfirmed(formHeight);
   } catch (error) {
     console.log("une erreur est survenue : " + error.message);
   }
+  console.log("success !");
 });
+
+function formConfirmed(formHeight) {
+  let form = document.querySelector("form");
+  let success = document.querySelector(".confirmed");
+
+  success.style.height = formHeight + "px";
+  form.style.display = "none";
+  success.style.display = "flex";
+}
