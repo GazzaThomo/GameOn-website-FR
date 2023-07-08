@@ -62,6 +62,7 @@ function validateRadioButtons(location) {
     secondParentNodeElement.setAttribute("data-error", errorMessage);
     secondParentNodeElement.setAttribute("data-error-visible", "true");
   }
+  throw new Error(errorMessage);
 }
 
 function validateConditions(conditionsCheckbox) {
@@ -72,7 +73,7 @@ function validateConditions(conditionsCheckbox) {
     firstParentNodeElement.setAttribute("data-error-visible", "true");
     secondParentNodeElement.setAttribute("data-error", errorMessage);
     secondParentNodeElement.setAttribute("data-error-visible", "true");
-    return;
+    throw new Error(errorMessage);
   }
   removeErrorCssToHtml(conditionsCheckbox);
   secondParentNodeElement.setAttribute("data-error", "");
@@ -84,6 +85,7 @@ function addErrorCssToHtml(node, errorMessage) {
   let parentNode = node.parentNode; // get parent of input data
   parentNode.setAttribute("data-error", errorMessage);
   parentNode.setAttribute("data-error-visible", "true");
+  throw new Error(errorMessage);
 }
 
 function removeErrorCssToHtml(node) {

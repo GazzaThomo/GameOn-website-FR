@@ -66,7 +66,7 @@ form.addEventListener("submit", (e) => {
     validateNumberOfTournements(numberOfTournements);
     validateRadioButtons(location);
     validateConditions(conditionsCheckbox);
-    // formConfirmed(formHeight);
+    formConfirmed(formHeight);
   } catch (error) {
     console.log("une erreur est survenue : " + error.message);
   }
