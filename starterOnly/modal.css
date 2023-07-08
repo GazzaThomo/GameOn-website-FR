@@ -229,27 +229,10 @@ input {
   border: 2px solid #e54858;
 }
 
-.radioData[data-error-visible="true"] {
+.form-wrapper[data-error-visible="true"] {
   border: 2px solid #e54858;
   border-radius: 8px;
   padding: 8px;
-}
-
-.radioWrapper[data-error]::after {
-  content: attr(data-error);
-  font-size: 0.4em;
-  color: #e54858;
-  display: block;
-  margin-top: 7px;
-  margin-bottom: 7px;
-  text-align: right;
-  line-height: 0.3;
-  opacity: 1;
-  transition: 0.3s;
-}
-
-.radioWrapper[data-error-visible="true"]::after {
-  opacity: 1;
 }
 
 /* input[data-error]::after {

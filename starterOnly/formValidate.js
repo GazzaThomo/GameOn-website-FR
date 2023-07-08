@@ -57,7 +57,6 @@ function validateRadioButtons(location) {
       return true;
     }
     let errorMessage = "Veuillez sélectionner au moins 1 ville parmi la liste.";
-    // addErrorCssToHtml(location[i], errorMessage);
 
     firstParentNodeElement.setAttribute("data-error-visible", "true");
     secondParentNodeElement.setAttribute("data-error", errorMessage);
@@ -66,15 +65,21 @@ function validateRadioButtons(location) {
 }
 
 function validateConditions(conditionsCheckbox) {
+  let firstParentNodeElement = conditionsCheckbox.parentNode;
+  let secondParentNodeElement = firstParentNodeElement.parentNode;
   if (!conditionsCheckbox.checked) {
     let errorMessage = "Vous devez accepter les CGU.";
-    addErrorCssToHtml(conditionsCheckbox, errorMessage);
+    firstParentNodeElement.setAttribute("data-error-visible", "true");
+    secondParentNodeElement.setAttribute("data-error", errorMessage);
+    secondParentNodeElement.setAttribute("data-error-visible", "true");
     return;
   }
   removeErrorCssToHtml(conditionsCheckbox);
+  secondParentNodeElement.setAttribute("data-error", "");
+  secondParentNodeElement.setAttribute("data-error-visible", "false");
 }
 
-// DRY functions!
+// DRY functions! add to css doesn't apply to the radio buttons or checkbox
 function addErrorCssToHtml(node, errorMessage) {
   let parentNode = node.parentNode; // get parent of input data
   parentNode.setAttribute("data-error", errorMessage);

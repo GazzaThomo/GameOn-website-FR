@@ -50,7 +50,6 @@ function closeModal() {
 let form = document.querySelector("form");
 
 form.addEventListener("submit", (e) => {
-  console.log(e);
   e.preventDefault();
   const firstName = document.getElementById("first");
   const lastName = document.getElementById("last");
@@ -67,12 +66,10 @@ form.addEventListener("submit", (e) => {
     validateNumberOfTournements(numberOfTournements);
     validateRadioButtons(location);
     validateConditions(conditionsCheckbox);
-    console.log("success");
     // formConfirmed(formHeight);
   } catch (error) {
     console.log("une erreur est survenue : " + error.message);
   }
-  console.log("success !");
 });
 
 function formConfirmed(formHeight) {
