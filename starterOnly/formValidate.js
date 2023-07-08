@@ -48,13 +48,20 @@ function validateNumberOfTournements(numberOfTournements) {
 
 function validateRadioButtons(location) {
   for (let i = 0; i < location.length; i++) {
+    let firstParentNodeElement = location[i].parentNode;
+    let secondParentNodeElement = firstParentNodeElement.parentNode;
     if (location[i].checked) {
       removeErrorCssToHtml(location[i]);
+      secondParentNodeElement.setAttribute("data-error", "");
+      secondParentNodeElement.setAttribute("data-error-visible", "false");
       return true;
     }
     let errorMessage = "Veuillez sélectionner au moins 1 ville parmi la liste.";
-    console.log(location[i].parentNode);
-    addErrorCssToHtml(location[i], errorMessage);
+    // addErrorCssToHtml(location[i], errorMessage);
+
+    firstParentNodeElement.setAttribute("data-error-visible", "true");
+    secondParentNodeElement.setAttribute("data-error", errorMessage);
+    secondParentNodeElement.setAttribute("data-error-visible", "true");
   }
 }
 

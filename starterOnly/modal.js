@@ -68,7 +68,7 @@ form.addEventListener("submit", (e) => {
     validateRadioButtons(location);
     validateConditions(conditionsCheckbox);
     console.log("success");
-    formConfirmed(formHeight);
+    // formConfirmed(formHeight);
   } catch (error) {
     console.log("une erreur est survenue : " + error.message);
   }
