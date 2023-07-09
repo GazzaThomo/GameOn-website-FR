@@ -175,7 +175,7 @@ main {
   margin: 5% auto;
   width: 100%;
   max-width: 500px;
-  animation-name: modalopen;
+  animation-name: modalOpen;
   animation-duration: var(--modal-duration);
   background: #232323;
   border-radius: 10px;
@@ -488,6 +488,14 @@ input {
   align-items: center;
   font-size: 36px;
   font-weight: 400;
+  position: relative;
+}
+
+.confirmed--fermer {
+  position: absolute;
+  top: 99%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 footer {
@@ -534,12 +542,22 @@ footer {
   }
 }
 
-@keyframes modalopen {
+@keyframes modalOpen {
   from {
     opacity: 0;
     transform: translateY(-150px);
   }
   to {
     opacity: 1;
+  }
+}
+
+@keyframes modalClose {
+  from {
+    opactiy: 1;
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-150px);
   }
 }
