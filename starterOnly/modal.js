@@ -20,7 +20,6 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
 // launch modal form
 function launchModal() {
-  // content.style.animationName = "modalOpen";
   modalbg.style.display = "block";
 }
 
@@ -46,15 +45,19 @@ function closeModalEscape(e) {
   }
 }
 
+//modal close function
 function closeModal() {
+  //change keyframe effect so the modal goes back up smooth
   content.style.animationName = "modalClose";
+
+  //reseting the parameter of the original keyframe. Use timeout with same timez as keyframe duration so the modal doesn't hide prematurely
   setTimeout(function () {
     modalbg.style.display = "none";
     content.style.animationName = "modalOpen";
   }, 800);
 }
 
-//Form submit
+//Form submit function
 let form = document.querySelector("form");
 
 form.addEventListener("submit", (e) => {
@@ -67,6 +70,8 @@ form.addEventListener("submit", (e) => {
   const location = document.querySelectorAll("input[type=radio]");
   const conditionsCheckbox = document.getElementById("checkbox1");
   const formHeight = document.querySelector("form").clientHeight;
+
+  //each validate function has a throw new Error inside, to stop the code if an error is detected
   try {
     validateFirstName(firstName);
     validateLastName(lastName);
@@ -74,12 +79,15 @@ form.addEventListener("submit", (e) => {
     validateNumberOfTournements(numberOfTournements);
     validateRadioButtons(location);
     validateConditions(conditionsCheckbox);
+
+    //only runs if no errors
     formConfirmed(formHeight);
   } catch (error) {
     console.log("une erreur est survenue : " + error.message);
   }
 });
 
+//function for hiding the form and showing the completed page on the modal
 function formConfirmed(formHeight) {
   let form = document.querySelector("form");
   let success = document.querySelector(".confirmed");

@@ -48,36 +48,23 @@ function validateNumberOfTournements(numberOfTournements) {
 
 function validateRadioButtons(location) {
   for (let i = 0; i < location.length; i++) {
-    let firstParentNodeElement = location[i].parentNode;
-    let secondParentNodeElement = firstParentNodeElement.parentNode;
-    if (location[i].checked) {
-      removeErrorCssToHtml(location[i]);
-      secondParentNodeElement.setAttribute("data-error", "");
-      secondParentNodeElement.setAttribute("data-error-visible", "false");
-      return true;
+    try {
+      return validateCheckboxAndRadio(
+        location[i],
+        "Veuillez sélectionner au moins 1 ville parmi la liste."
+      );
+    } catch (e) {
+      continue;
     }
-    let errorMessage = "Veuillez sélectionner au moins 1 ville parmi la liste.";
-
-    firstParentNodeElement.setAttribute("data-error-visible", "true");
-    secondParentNodeElement.setAttribute("data-error", errorMessage);
-    secondParentNodeElement.setAttribute("data-error-visible", "true");
   }
-  throw new Error(errorMessage);
+  throw new Error("Veuillez sélectionner au moins 1 ville parmi la liste.");
 }
 
 function validateConditions(conditionsCheckbox) {
-  let firstParentNodeElement = conditionsCheckbox.parentNode;
-  let secondParentNodeElement = firstParentNodeElement.parentNode;
-  if (!conditionsCheckbox.checked) {
-    let errorMessage = "Vous devez accepter les CGU.";
-    firstParentNodeElement.setAttribute("data-error-visible", "true");
-    secondParentNodeElement.setAttribute("data-error", errorMessage);
-    secondParentNodeElement.setAttribute("data-error-visible", "true");
-    throw new Error(errorMessage);
-  }
-  removeErrorCssToHtml(conditionsCheckbox);
-  secondParentNodeElement.setAttribute("data-error", "");
-  secondParentNodeElement.setAttribute("data-error-visible", "false");
+  return validateCheckboxAndRadio(
+    conditionsCheckbox,
+    "Vous devez accepter les CGU."
+  );
 }
 
 // DRY functions! add to css doesn't apply to the radio buttons or checkbox
@@ -92,4 +79,22 @@ function removeErrorCssToHtml(node) {
   let parentNode = node.parentNode; // get parent of input data
   parentNode.setAttribute("data-error", "");
   parentNode.setAttribute("data-error-visible", "false");
+}
+
+//For radio buttons and CGU checkbox only
+function validateCheckboxAndRadio(node, errorMessage) {
+  let firstParentNodeElement = node.parentNode;
+  let secondParentNodeElement = firstParentNodeElement.parentNode;
+
+  if (node.checked) {
+    removeErrorCssToHtml(node);
+    secondParentNodeElement.setAttribute("data-error", "");
+    secondParentNodeElement.setAttribute("data-error-visible", "false");
+    return true;
+  }
+
+  firstParentNodeElement.setAttribute("data-error-visible", "true");
+  secondParentNodeElement.setAttribute("data-error", errorMessage);
+  secondParentNodeElement.setAttribute("data-error-visible", "true");
+  throw new Error(errorMessage);
 }
