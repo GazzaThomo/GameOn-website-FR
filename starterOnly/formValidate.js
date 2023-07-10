@@ -7,7 +7,7 @@
 // }
 
 function validateFirstName(firstName) {
-  if (firstName.value.length < 2) {
+  if (firstName.value.trim().length < 2) {
     let errorMessage = "Le prénom doit faire au minimum 2 caractères !";
     addErrorCssToHtml(firstName, errorMessage);
     return;
@@ -16,7 +16,7 @@ function validateFirstName(firstName) {
 }
 
 function validateLastName(lastName) {
-  if (lastName.value.length < 2) {
+  if (lastName.value.trim().length < 2) {
     let errorMessage = "Le nom de famille doit faire au minimum 2 caractères !";
     addErrorCssToHtml(lastName, errorMessage);
     return;
@@ -98,3 +98,5 @@ function validateCheckboxAndRadio(node, errorMessage) {
   secondParentNodeElement.setAttribute("data-error-visible", "true");
   throw new Error(errorMessage);
 }
+
+//RESET FORM AND BIRTHDATE
