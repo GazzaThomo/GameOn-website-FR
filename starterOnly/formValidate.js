@@ -1,11 +1,5 @@
 //We use these functions to validate all the parameters in the formula when submitting
 
-// function validateFirstName(firstName) {
-//   if (firstName.value.length < 2) {
-//     throw new Error("Le prénom doit faire 2 caractères ou plus !");
-//   }
-// }
-
 function validateFirstName(firstName) {
   if (firstName.value.trim().length < 2) {
     let errorMessage = "Le prénom doit faire au minimum 2 caractères !";
@@ -33,6 +27,22 @@ function validateEmail(email) {
     return;
   }
   removeErrorCssToHtml(email);
+}
+
+function validateBirthdate(birthDate) {
+  let dob = birthDate.value;
+
+  //create date objects
+  let dobDate = new Date(dob);
+  let currentDate = new Date();
+
+  //check if dob is valid date and not in future
+  if (isNaN(dobDate.getTime()) || dobDate > currentDate) {
+    let errorMessage = "Veuillez rentrer une date de naissance valide";
+    addErrorCssToHtml(birthDate, errorMessage);
+    return;
+  }
+  removeErrorCssToHtml(birthDate);
 }
 
 function validateNumberOfTournements(numberOfTournements) {

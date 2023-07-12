@@ -14,6 +14,8 @@ const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const modalCloseBtn = document.querySelector(".close");
 const confirmedFermer = document.querySelector(".confirmed--fermer");
+const form = document.querySelector("form");
+const success = document.querySelector(".confirmed");
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -21,6 +23,8 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 // launch modal form
 function launchModal() {
   modalbg.style.display = "block";
+  success.style.display = "none";
+  form.style.display = "block";
 }
 
 //This part of the code can be refactored later
@@ -58,8 +62,6 @@ function closeModal() {
 }
 
 //Form submit function
-let form = document.querySelector("form");
-
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   const firstName = document.getElementById("first");
@@ -76,23 +78,22 @@ form.addEventListener("submit", (e) => {
     validateFirstName(firstName);
     validateLastName(lastName);
     validateEmail(email);
+    validateBirthdate(birthDate);
     validateNumberOfTournements(numberOfTournements);
     validateRadioButtons(location);
     validateConditions(conditionsCheckbox);
 
     //only runs if no errors
-    formConfirmed(formHeight);
+    formConfirmed(formHeight, e);
   } catch (error) {
     console.log("une erreur est survenue : " + error.message);
   }
 });
 
 //function for hiding the form and showing the completed page on the modal
-function formConfirmed(formHeight) {
-  let form = document.querySelector("form");
-  let success = document.querySelector(".confirmed");
-
+function formConfirmed(formHeight, e) {
   success.style.height = formHeight + "px";
   form.style.display = "none";
   success.style.display = "flex";
+  e.target.reset();
 }
