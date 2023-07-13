@@ -76,7 +76,7 @@ form.addEventListener("submit", (e) => {
   // create a boolean to handle if the form is valid or not
   let isValidForm = true;
 
-  //
+  // here we use an if statement for each function to check if the form is valid
   if (!validateFirstName(firstName)) isValidForm = false;
   if (!validateLastName(lastName)) isValidForm = false;
   if (!validateEmail(email)) isValidForm = false;
@@ -85,6 +85,7 @@ form.addEventListener("submit", (e) => {
   if (!validateRadioButtons(location)) isValidForm = false;
   if (!validateConditions(conditionsCheckbox)) isValidForm = false;
 
+  // if one of the if statements is false, form not confirmed
   if (isValidForm) {
     formConfirmed(formHeight, e);
   } else {
