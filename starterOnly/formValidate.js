@@ -4,18 +4,22 @@ function validateFirstName(firstName) {
   if (firstName.value.trim().length < 2) {
     let errorMessage = "Le prénom doit faire au minimum 2 caractères !";
     addErrorCssToHtml(firstName, errorMessage);
-    return;
+    return false;
+  } else {
+    removeErrorCssToHtml(firstName);
+    return true;
   }
-  removeErrorCssToHtml(firstName);
 }
 
 function validateLastName(lastName) {
   if (lastName.value.trim().length < 2) {
     let errorMessage = "Le nom de famille doit faire au minimum 2 caractères !";
     addErrorCssToHtml(lastName, errorMessage);
-    return;
+    return false;
+  } else {
+    removeErrorCssToHtml(lastName);
+    return true;
   }
-  removeErrorCssToHtml(lastName);
 }
 
 function validateEmail(email) {
@@ -24,9 +28,11 @@ function validateEmail(email) {
   if (!emailValidation) {
     let errorMessage = "L'adresse mail n'est pas valide !";
     addErrorCssToHtml(email, errorMessage);
-    return;
+    return false;
+  } else {
+    removeErrorCssToHtml(email);
+    return true;
   }
-  removeErrorCssToHtml(email);
 }
 
 function validateBirthdate(birthDate) {
@@ -40,9 +46,11 @@ function validateBirthdate(birthDate) {
   if (isNaN(dobDate.getTime()) || dobDate > currentDate) {
     let errorMessage = "Veuillez rentrer une date de naissance valide";
     addErrorCssToHtml(birthDate, errorMessage);
-    return;
+    return false;
+  } else {
+    removeErrorCssToHtml(birthDate);
+    return true;
   }
-  removeErrorCssToHtml(birthDate);
 }
 
 function validateNumberOfTournements(numberOfTournements) {
@@ -51,23 +59,23 @@ function validateNumberOfTournements(numberOfTournements) {
   if (!numberValidation) {
     let errorMessage = "Vous devez rentrer un nombre entier !";
     addErrorCssToHtml(numberOfTournements, errorMessage);
-    return;
+    return false;
+  } else {
+    removeErrorCssToHtml(numberOfTournements);
+    return true;
   }
-  removeErrorCssToHtml(numberOfTournements);
 }
 
 function validateRadioButtons(location) {
+  let isValid = false;
+  let errorMessage = "Vous devez choisir au moins une ville dans la liste";
   for (let i = 0; i < location.length; i++) {
-    try {
-      return validateCheckboxAndRadio(
-        location[i],
-        "Veuillez sélectionner au moins 1 ville parmi la liste."
-      );
-    } catch (e) {
-      continue;
+    if (validateCheckboxAndRadio(location[i], errorMessage)) {
+      isValid = true;
+      break;
     }
   }
-  throw new Error("Veuillez sélectionner au moins 1 ville parmi la liste.");
+  return isValid;
 }
 
 function validateConditions(conditionsCheckbox) {
@@ -82,7 +90,6 @@ function addErrorCssToHtml(node, errorMessage) {
   let parentNode = node.parentNode; // get parent of input data
   parentNode.setAttribute("data-error", errorMessage);
   parentNode.setAttribute("data-error-visible", "true");
-  throw new Error(errorMessage);
 }
 
 function removeErrorCssToHtml(node) {
@@ -101,12 +108,10 @@ function validateCheckboxAndRadio(node, errorMessage) {
     secondParentNodeElement.setAttribute("data-error", "");
     secondParentNodeElement.setAttribute("data-error-visible", "false");
     return true;
+  } else {
+    firstParentNodeElement.setAttribute("data-error-visible", "true");
+    secondParentNodeElement.setAttribute("data-error", errorMessage);
+    secondParentNodeElement.setAttribute("data-error-visible", "true");
+    return false;
   }
-
-  firstParentNodeElement.setAttribute("data-error-visible", "true");
-  secondParentNodeElement.setAttribute("data-error", errorMessage);
-  secondParentNodeElement.setAttribute("data-error-visible", "true");
-  throw new Error(errorMessage);
 }
-
-//RESET FORM AND BIRTHDATE

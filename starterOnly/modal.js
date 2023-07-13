@@ -73,20 +73,22 @@ form.addEventListener("submit", (e) => {
   const conditionsCheckbox = document.getElementById("checkbox1");
   const formHeight = document.querySelector("form").clientHeight;
 
-  //each validate function has a throw new Error inside, to stop the code if an error is detected
-  try {
-    validateFirstName(firstName);
-    validateLastName(lastName);
-    validateEmail(email);
-    validateBirthdate(birthDate);
-    validateNumberOfTournements(numberOfTournements);
-    validateRadioButtons(location);
-    validateConditions(conditionsCheckbox);
+  // create a boolean to handle if the form is valid or not
+  let isValidForm = true;
 
-    //only runs if no errors
+  //
+  if (!validateFirstName(firstName)) isValidForm = false;
+  if (!validateLastName(lastName)) isValidForm = false;
+  if (!validateEmail(email)) isValidForm = false;
+  if (!validateBirthdate(birthDate)) isValidForm = false;
+  if (!validateNumberOfTournements(numberOfTournements)) isValidForm = false;
+  if (!validateRadioButtons(location)) isValidForm = false;
+  if (!validateConditions(conditionsCheckbox)) isValidForm = false;
+
+  if (isValidForm) {
     formConfirmed(formHeight, e);
-  } catch (error) {
-    console.log("une erreur est survenue : " + error.message);
+  } else {
+    console.log("There are some errors in the form.");
   }
 });
 
